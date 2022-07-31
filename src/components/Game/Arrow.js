@@ -1,8 +1,16 @@
 import React from "react";
 import KeyToNum from "../../utils/KeyToNum";
 import BottomArrow from "../Layout/BottomArrow";
+import Timer from "./Timer";
 
-const Arrow = ({ arrowContents, setArrowContents }) => {
+const Arrow = ({
+  arrowContents,
+  setArrowContents,
+  seconds,
+  setSeconds,
+  minutes,
+  setMinutes,
+}) => {
   window.onkeydown = (keyEvent) => {
     const keyNum = KeyToNum(keyEvent.code);
     if (keyNum === arrowContents[0]) {
@@ -35,6 +43,12 @@ const Arrow = ({ arrowContents, setArrowContents }) => {
         })}
         {arrowContents.length > 6 && <span className="text-3xl">···</span>}
       </div>
+      <Timer
+        seconds={seconds}
+        setSeconds={setSeconds}
+        minutes={minutes}
+        setMinutes={setMinutes}
+      />
       <BottomArrow clickButton={clickButton} />
     </>
   );

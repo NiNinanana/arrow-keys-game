@@ -1,25 +1,42 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Arrow from "./Arrow";
 
 const GamePage = () => {
+  const navigate = useNavigate();
   const { level } = useParams();
+
+  const [isStart, setIsStart] = useState(false);
+  const [arrowContents, setArrowContents] = useState([]);
+
+  const randomArrow = () => {
+    new Array(Number(level)).fill(1).forEach(() => {
+      const random = Math.floor(Math.random() * 4 + 1);
+      setArrowContents((prev) => [...prev, random]);
+    });
+  };
+
+  useEffect(() => {
+    randomArrow();
+  }, []);
+
+  console.log(arrowContents);
 
   return (
     <>
       <div>GamePage</div>
+      <button onClick={() => navigate("/")}>처음으로</button>
       <div>레벨: {level}</div>
-      {new Array(Number(level)).fill(1).map((_, idx) => {
-        const random = Math.floor(Math.random() * 4 + 1);
-
-        return (
-          <span key={idx}>
-            {random === 1 && <span>←</span>}
-            {random === 2 && <span>→</span>}
-            {random === 3 && <span>↑</span>}
-            {random === 4 && <span>↓</span>}
-          </span>
-        );
-      })}
+      {!isStart ? (
+        <button onClick={() => setIsStart(true)}>시작</button>
+      ) : (
+        <>
+          <Arrow
+            arrowContents={arrowContents}
+            setArrowContents={setArrowContents}
+          />
+        </>
+      )}
     </>
   );
 };

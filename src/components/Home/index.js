@@ -5,7 +5,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   const [level, setLevel] = useState(1);
-  console.log(level);
+
   return (
     <>
       <div>HomePage</div>

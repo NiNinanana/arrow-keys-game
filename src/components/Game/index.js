@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Arrow from "./Arrow";
@@ -19,8 +20,6 @@ const GamePage = () => {
   useEffect(() => {
     randomArrow();
   }, []);
-
-  console.log(arrowContents);
 
   return (
     <>

@@ -1,17 +1,21 @@
 import React from "react";
 import KeyToNum from "../../utils/KeyToNum";
+import BottomArrow from "../Layout/BottomArrow";
 
 const Arrow = ({ arrowContents, setArrowContents }) => {
-  console.log(arrowContents);
-
   window.onkeydown = (keyEvent) => {
     const keyNum = KeyToNum(keyEvent.code);
     if (keyNum === arrowContents[0]) {
-      console.log("성공");
       setArrowContents((prev) => prev.slice(1));
     }
-    console.log(keyNum);
   };
+
+  const clickButton = (keyNum) => {
+    if (keyNum === arrowContents[0]) {
+      setArrowContents((prev) => prev.slice(1));
+    }
+  };
+
   return (
     <>
       {arrowContents.map((el, idx) => (
@@ -22,6 +26,7 @@ const Arrow = ({ arrowContents, setArrowContents }) => {
           {el === 4 && <span>→</span>}
         </span>
       ))}
+      <BottomArrow clickButton={clickButton} />
     </>
   );
 };

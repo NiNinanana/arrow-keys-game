@@ -1,20 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import KeyToNum from "../../utils/KeyToNum";
 import BottomArrow from "../Layout/BottomArrow";
 import Timer from "./Timer";
 
-const Arrow = ({
-  arrowContents,
-  setArrowContents,
-  seconds,
-  setSeconds,
-  minutes,
-  setMinutes,
-}) => {
+const Arrow = ({ arrowContents, setArrowContents, time, setTime }) => {
+  const [isError, setIsError] = useState(false);
+
   window.onkeydown = (keyEvent) => {
     const keyNum = KeyToNum(keyEvent.code);
     if (keyNum === arrowContents[0]) {
       setArrowContents((prev) => prev.slice(1));
+    } else {
+      setTime((prev) => prev + 1);
+      setIsError(true);
     }
   };
 
@@ -44,10 +42,10 @@ const Arrow = ({
         {arrowContents.length > 6 && <span className="text-3xl">···</span>}
       </div>
       <Timer
-        seconds={seconds}
-        setSeconds={setSeconds}
-        minutes={minutes}
-        setMinutes={setMinutes}
+        time={time}
+        setTime={setTime}
+        isError={isError}
+        setIsError={setIsError}
       />
       <BottomArrow clickButton={clickButton} />
     </>

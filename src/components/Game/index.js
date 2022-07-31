@@ -1,18 +1,16 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Topbar from "../Layout/Topbar";
 import Arrow from "./Arrow";
 
 const GamePage = () => {
-  const navigate = useNavigate();
   const { level } = useParams();
 
   const [isStart, setIsStart] = useState(false);
   const [arrowContents, setArrowContents] = useState([]);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const [time, setTime] = useState(0);
 
   const randomArrow = () => {
     new Array(Number(level)).fill(1).forEach(() => {
@@ -24,9 +22,8 @@ const GamePage = () => {
   const reset = () => {
     setIsStart(false);
     setArrowContents([]);
-    setMinutes(0);
-    setSeconds(-1);
     randomArrow();
+    setTime(0);
   };
 
   useEffect(() => {
@@ -38,18 +35,17 @@ const GamePage = () => {
     if (!arrowContents.length) {
       if (
         !confirm(
-          `걸린 시간은 ${`00${minutes}`.slice(-2)}:${`00${seconds}`.slice(
-            -2
-          )}입니다!\n다음 레벨로 넘어갈까요?`
+          `걸린 시간은 ${`00${Math.floor(time / 60)}`.slice(-2)}분 ${`00${
+            time % 60
+          }`.slice(-2)}초입니다!\n다음 레벨로 넘어갈까요?`
         )
       ) {
         reset();
         return;
       }
       setIsStart(false);
-      setMinutes(0);
-      setSeconds(-1);
-      navigate(`/game/${Number(level) + 1}`);
+      setTime(0);
+      location.href = `/game/${Number(level) + 1}`;
     }
   }, [arrowContents]);
 
@@ -72,10 +68,8 @@ const GamePage = () => {
           <Arrow
             arrowContents={arrowContents}
             setArrowContents={setArrowContents}
-            minutes={minutes}
-            setMinutes={setMinutes}
-            seconds={seconds}
-            setSeconds={setSeconds}
+            time={time}
+            setTime={setTime}
           />
         </>
       )}

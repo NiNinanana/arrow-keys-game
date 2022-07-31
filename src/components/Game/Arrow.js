@@ -19,6 +19,9 @@ const Arrow = ({ arrowContents, setArrowContents, time, setTime }) => {
   const clickButton = (keyNum) => {
     if (keyNum === arrowContents[0]) {
       setArrowContents((prev) => prev.slice(1));
+    } else {
+      setTime((prev) => prev + 1);
+      setIsError(true);
     }
   };
 

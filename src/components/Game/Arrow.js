@@ -3,7 +3,14 @@ import KeyToNum from "../../utils/KeyToNum";
 import BottomArrow from "../Layout/BottomArrow";
 import Timer from "./Timer";
 
-const Arrow = ({ arrowContents, setArrowContents, time, setTime }) => {
+const Arrow = ({
+  arrowContents,
+  setArrowContents,
+  time,
+  setTime,
+  smallTime,
+  setSmallTime,
+}) => {
   const [isError, setIsError] = useState(false);
 
   window.onkeydown = (keyEvent) => {
@@ -49,6 +56,8 @@ const Arrow = ({ arrowContents, setArrowContents, time, setTime }) => {
         setTime={setTime}
         isError={isError}
         setIsError={setIsError}
+        smallTime={smallTime}
+        setSmallTime={setSmallTime}
       />
       <BottomArrow clickButton={clickButton} />
     </>

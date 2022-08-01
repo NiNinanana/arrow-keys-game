@@ -11,6 +11,7 @@ const GamePage = () => {
   const [isStart, setIsStart] = useState(false);
   const [arrowContents, setArrowContents] = useState([]);
   const [time, setTime] = useState(0);
+  const [smallTime, setSmallTime] = useState(0);
 
   const randomArrow = () => {
     new Array(Number(level)).fill(1).forEach(() => {
@@ -37,7 +38,9 @@ const GamePage = () => {
         !confirm(
           `걸린 시간은 ${`00${Math.floor(time / 60)}`.slice(-2)}분 ${`00${
             time % 60
-          }`.slice(-2)}초입니다!\n다음 레벨로 넘어갈까요?`
+          }`.slice(-2)}초 ${`00${smallTime}`.slice(
+            -2
+          )}입니다!\n다음 레벨로 넘어갈까요?`
         )
       ) {
         reset();
@@ -74,6 +77,8 @@ const GamePage = () => {
             setArrowContents={setArrowContents}
             time={time}
             setTime={setTime}
+            smallTime={smallTime}
+            setSmallTime={setSmallTime}
           />
         </>
       )}

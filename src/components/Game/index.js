@@ -49,6 +49,10 @@ const GamePage = () => {
     }
   }, [arrowContents]);
 
+  window.onkeydown = (keyEvent) => {
+    if (keyEvent.code === "Enter") setIsStart(true);
+  };
+
   return (
     <div className="pt-14">
       <Topbar level={level} reset={reset} />

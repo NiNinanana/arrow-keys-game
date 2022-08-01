@@ -44,6 +44,7 @@ const GamePage = () => {
         )
       ) {
         reset();
+        location.reload();
         return;
       }
       setIsStart(false);

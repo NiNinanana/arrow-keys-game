@@ -15,17 +15,17 @@ const Timer = ({
 
   useEffect(() => {
     setInterval(() => {
-      startTimer();
-    }, 1000);
-  }, []);
-
-  useEffect(() => {
-    setInterval(() => {
       setSmallTime((prev) => {
         if (prev === 99) return 0;
         return prev + 1;
       });
     }, 10);
+  }, []);
+
+  useEffect(() => {
+    setInterval(() => {
+      startTimer();
+    }, 1000);
   }, []);
 
   useEffect(() => {
